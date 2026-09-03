@@ -17,16 +17,17 @@ Building practical software, automation tools, and learning systems.
 
 <br/>
 
-![GitHub Stats](https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Hermann-33&theme=github_dark)
-![Top Languages](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Hermann-33&theme=github_dark)
+![Profile Details](profile-summary-card-output/github_dark/0-profile-details.svg)
 
-</div>
+<br/>
 
-## Contribution Activity
+![Top Languages by Repository](profile-summary-card-output/github_dark/1-repos-per-language.svg)
+![Top Languages by Commit](profile-summary-card-output/github_dark/2-most-commit-language.svg)
 
-<div align="center">
+<br/>
 
-![Hermann-33 GitHub Contribution Graph](https://ghchart.rshah.org/Hermann-33)
+![GitHub Stats](profile-summary-card-output/github_dark/3-stats.svg)
+![Productive Time](profile-summary-card-output/github_dark/4-productive-time.svg)
 
 </div>
 
@@ -41,5 +42,5 @@ Building practical software, automation tools, and learning systems.
 ---
 
 <div align="center">
-  <sub>Stats update automatically from GitHub activity.</sub>
+  <sub>Private repository names remain hidden. Aggregate stats refresh automatically every day.</sub>
 </div>
