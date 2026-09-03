@@ -13,7 +13,7 @@ Building practical software, automation tools, and learning systems.
 
 <div align="center">
 
-![All-Repo GitHub Stats](assets/redbull-all-repo-stats.svg)
+![GitHub Stats](assets/github-stats-redbull-v2.svg)
 
 <br/>
 
@@ -42,5 +42,5 @@ Building practical software, automation tools, and learning systems.
 ---
 
 <div align="center">
-  <sub>Private repository names remain hidden. Aggregate stats refresh automatically every day.</sub>
+  <sub>Aggregate stats refresh automatically every day.</sub>
 </div>
