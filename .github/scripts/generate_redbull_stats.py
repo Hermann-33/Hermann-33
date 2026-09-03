@@ -116,7 +116,6 @@ def fetch_all_contributions(created_at: date, today: date):
 
 def compute_streaks(day_counts: dict, today: date):
     sorted_days = sorted(day_counts.items())
-
     nonzero_days = [d for d, c in sorted_days if c > 0]
     first_contribution = nonzero_days[0] if nonzero_days else today
 
@@ -135,18 +134,15 @@ def compute_streaks(day_counts: dict, today: date):
     longest_streak = 0
     longest_start = None
     longest_end = None
-
     run_len = 0
     run_start = None
     run_end = None
 
     if sorted_days:
-        start_scan = sorted_days[0][0]
+        d = sorted_days[0][0]
         end_scan = sorted_days[-1][0]
-        d = start_scan
         while d <= end_scan:
-            count = day_counts.get(d, 0)
-            if count > 0:
+            if day_counts.get(d, 0) > 0:
                 if run_len == 0:
                     run_start = d
                 run_end = d
@@ -177,16 +173,16 @@ def compute_streaks(day_counts: dict, today: date):
     }
 
 
-def make_svg(display_name, total_contributions, streaks):
+def make_svg(total_contributions, streaks):
     total_text = f"{total_contributions:,}"
-    total_range = f"{fmt_date(streaks['first_contribution'])} - Present"
+    total_range = f"Since {fmt_date(streaks['first_contribution'])}"
 
     if streaks["current_streak"] > 0:
         current_num = str(streaks["current_streak"])
         current_range = fmt_short_range(streaks["current_start"], streaks["current_end"])
     else:
         current_num = "0"
-        current_range = "No streak today"
+        current_range = "No active streak"
 
     if streaks["longest_streak"] > 0:
         longest_num = str(streaks["longest_streak"])
@@ -195,56 +191,37 @@ def make_svg(display_name, total_contributions, streaks):
         longest_num = "0"
         longest_range = "No streak yet"
 
-    title = escape(f"{display_name} • All-Repo GitHub Stats")
-    subtitle = escape("Public + private contributions included")
-
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="980" height="320" viewBox="0 0 980 320" role="img" aria-label="All-repo GitHub stats">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="700" height="190" viewBox="0 0 700 190" role="img" aria-label="GitHub contribution and streak stats">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#06162f"/>
-      <stop offset="58%" stop-color="#0a2454"/>
-      <stop offset="100%" stop-color="#07101f"/>
-    </linearGradient>
-    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#e21b2d"/>
-      <stop offset="48%" stop-color="#ff233b"/>
-      <stop offset="100%" stop-color="#ffd21e"/>
-    </linearGradient>
     <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#143d8d"/>
-      <stop offset="50%" stop-color="#e21b2d"/>
+      <stop offset="0%" stop-color="#e21b2d"/>
+      <stop offset="72%" stop-color="#e21b2d"/>
       <stop offset="100%" stop-color="#ffd21e"/>
     </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.38"/>
-    </filter>
   </defs>
 
-  <rect width="980" height="320" rx="24" fill="url(#bg)"/>
-  <rect x="18" y="18" width="944" height="284" rx="20" fill="#08152b" stroke="#173b78" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="40" y="88" width="900" height="3" rx="1.5" fill="url(#accent)" opacity="0.95"/>
+  <rect x="0.75" y="0.75" width="698.5" height="188.5" rx="10" fill="#071426" stroke="#20324b" stroke-width="1.5"/>
+  <rect x="22" y="16" width="656" height="2" rx="1" fill="url(#accent)"/>
 
-  <text x="40" y="52" fill="#f7f9ff" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700">{title}</text>
-  <text x="40" y="78" fill="#aebbd3" font-size="15" font-family="Segoe UI, Arial, sans-serif">{subtitle}</text>
+  <line x1="233" y1="38" x2="233" y2="154" stroke="#223753" stroke-width="1"/>
+  <line x1="467" y1="38" x2="467" y2="154" stroke="#223753" stroke-width="1"/>
 
-  <line x1="326" y1="111" x2="326" y2="258" stroke="#274878" stroke-width="2"/>
-  <line x1="653" y1="111" x2="653" y2="258" stroke="#274878" stroke-width="2"/>
+  <g font-family="Segoe UI, Ubuntu, Helvetica Neue, Arial, sans-serif">
+    <text x="116.5" y="78" text-anchor="middle" fill="#f7f9fc" font-size="38" font-weight="700">{total_text}</text>
+    <text x="116.5" y="108" text-anchor="middle" fill="#d9e1ec" font-size="15" font-weight="600">Total Contributions</text>
+    <text x="116.5" y="133" text-anchor="middle" fill="#8496ae" font-size="11">{escape(total_range)}</text>
 
-  <text x="163" y="162" text-anchor="middle" fill="#ffffff" font-size="58" font-family="Segoe UI, Arial, sans-serif" font-weight="800">{total_text}</text>
-  <text x="163" y="198" text-anchor="middle" fill="#e7ecf7" font-size="25" font-family="Segoe UI, Arial, sans-serif" font-weight="600">Total Contributions</text>
-  <text x="163" y="230" text-anchor="middle" fill="#9fb0cd" font-size="18" font-family="Segoe UI, Arial, sans-serif">{escape(total_range)}</text>
+    <circle cx="350" cy="72" r="35" fill="none" stroke="#1e3552" stroke-width="6"/>
+    <circle cx="350" cy="72" r="35" fill="none" stroke="#e21b2d" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="378" cy="51" r="3.5" fill="#ffd21e"/>
+    <text x="350" y="83" text-anchor="middle" fill="#ffffff" font-size="32" font-weight="700">{current_num}</text>
+    <text x="350" y="128" text-anchor="middle" fill="#ffd21e" font-size="15" font-weight="600">Current Streak</text>
+    <text x="350" y="151" text-anchor="middle" fill="#8496ae" font-size="11">{escape(current_range)}</text>
 
-  <circle cx="490" cy="150" r="54" fill="none" stroke="#17335f" stroke-width="10"/>
-  <circle cx="490" cy="150" r="54" fill="none" stroke="url(#ring)" stroke-width="10" stroke-linecap="round"/>
-  <text x="490" y="161" text-anchor="middle" fill="#ffffff" font-size="50" font-family="Segoe UI, Arial, sans-serif" font-weight="800">{current_num}</text>
-  <text x="490" y="222" text-anchor="middle" fill="#ffd21e" font-size="25" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Current Streak</text>
-  <text x="490" y="254" text-anchor="middle" fill="#9fb0cd" font-size="18" font-family="Segoe UI, Arial, sans-serif">{escape(current_range)}</text>
-
-  <text x="816" y="162" text-anchor="middle" fill="#ffffff" font-size="58" font-family="Segoe UI, Arial, sans-serif" font-weight="800">{longest_num}</text>
-  <text x="816" y="198" text-anchor="middle" fill="#e7ecf7" font-size="25" font-family="Segoe UI, Arial, sans-serif" font-weight="600">Longest Streak</text>
-  <text x="816" y="230" text-anchor="middle" fill="#9fb0cd" font-size="18" font-family="Segoe UI, Arial, sans-serif">{escape(longest_range)}</text>
-
-  <text x="490" y="287" text-anchor="middle" fill="#7187aa" font-size="15" font-family="Segoe UI, Arial, sans-serif">Private repository names remain hidden • generated from GitHub GraphQL</text>
+    <text x="583.5" y="78" text-anchor="middle" fill="#f7f9fc" font-size="38" font-weight="700">{longest_num}</text>
+    <text x="583.5" y="108" text-anchor="middle" fill="#d9e1ec" font-size="15" font-weight="600">Longest Streak</text>
+    <text x="583.5" y="133" text-anchor="middle" fill="#8496ae" font-size="11">{escape(longest_range)}</text>
+  </g>
 </svg>
 """
 
@@ -256,9 +233,7 @@ def main():
 
     total_contributions, day_counts = fetch_all_contributions(created_at, today)
     streaks = compute_streaks(day_counts, today)
-
-    display_name = user["name"] or user["login"]
-    svg = make_svg(display_name, total_contributions, streaks)
+    svg = make_svg(total_contributions, streaks)
 
     out_path = Path("assets/redbull-all-repo-stats.svg")
     out_path.parent.mkdir(parents=True, exist_ok=True)
