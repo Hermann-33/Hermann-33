@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "17 0 * * *"
-  push:
-    paths:
-      - ".github/workflows/profile-summary-cards.yml"
 
 jobs:
   build:
@@ -17,12 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate profile summary cards
+      - name: Generate private-aware profile summary cards
         uses: vn7n24fzkq/github-profile-summary-cards@release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SUMMARY_GITHUB_TOKEN }}
         with:
           USERNAME: ${{ github.repository_owner }}
           BRANCH_NAME: main
           UTC_OFFSET: 8
           AUTO_PUSH: true
+          THEME: github_dark
