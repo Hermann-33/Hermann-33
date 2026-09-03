@@ -26,17 +26,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.stats }}
           USERNAME: ${{ github.repository_owner }}
-        run: python .github/scripts/generate_redbull_stats.py
+        run: |
+          python .github/scripts/generate_redbull_stats.py
+          cp assets/redbull-all-repo-stats.svg assets/github-stats-redbull-v2.svg
 
       - name: Commit generated SVG
         run: |
-          if [ -z "$(git status --porcelain -- assets/redbull-all-repo-stats.svg)" ]; then
+          if [ -z "$(git status --porcelain -- assets/github-stats-redbull-v2.svg)" ]; then
             echo "No changes."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/redbull-all-repo-stats.svg
-          git commit -m "Update Red Bull all-repo stats card"
+          git add assets/github-stats-redbull-v2.svg
+          git commit -m "Update GitHub stats card"
           git push
