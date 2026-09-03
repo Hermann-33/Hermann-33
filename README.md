@@ -13,7 +13,7 @@ Building practical software, automation tools, and learning systems.
 
 <div align="center">
 
-![GitHub Streak](https://streak-stats.demolab.com?user=Hermann-33&theme=dark&hide_border=true&border_radius=6)
+![All-Repo GitHub Stats](assets/redbull-all-repo-stats.svg)
 
 <br/>
 
