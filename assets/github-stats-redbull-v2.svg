@@ -14,16 +14,16 @@
   <line x1="467" y1="38" x2="467" y2="154" stroke="#223753" stroke-width="1"/>
 
   <g font-family="Segoe UI, Ubuntu, Helvetica Neue, Arial, sans-serif">
-    <text x="116.5" y="78" text-anchor="middle" fill="#f7f9fc" font-size="38" font-weight="700">1,631</text>
+    <text x="116.5" y="78" text-anchor="middle" fill="#f7f9fc" font-size="38" font-weight="700">1,632</text>
     <text x="116.5" y="108" text-anchor="middle" fill="#d9e1ec" font-size="15" font-weight="600">Total Contributions</text>
     <text x="116.5" y="133" text-anchor="middle" fill="#8496ae" font-size="11">Since Feb 13, 2022</text>
 
     <circle cx="350" cy="72" r="35" fill="none" stroke="#1e3552" stroke-width="6"/>
     <circle cx="350" cy="72" r="35" fill="none" stroke="#e21b2d" stroke-width="6" stroke-linecap="round"/>
     <circle cx="378" cy="51" r="3.5" fill="#ffd21e"/>
-    <text x="350" y="83" text-anchor="middle" fill="#ffffff" font-size="32" font-weight="700">4</text>
+    <text x="350" y="83" text-anchor="middle" fill="#ffffff" font-size="32" font-weight="700">0</text>
     <text x="350" y="128" text-anchor="middle" fill="#ffd21e" font-size="15" font-weight="600">Current Streak</text>
-    <text x="350" y="151" text-anchor="middle" fill="#8496ae" font-size="11">Aug 31 - Sep 3, 2026</text>
+    <text x="350" y="151" text-anchor="middle" fill="#8496ae" font-size="11">No active streak</text>
 
     <text x="583.5" y="78" text-anchor="middle" fill="#f7f9fc" font-size="38" font-weight="700">16</text>
     <text x="583.5" y="108" text-anchor="middle" fill="#d9e1ec" font-size="15" font-weight="600">Longest Streak</text>
